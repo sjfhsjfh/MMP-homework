@@ -1,0 +1,8 @@
+# Mac OS
+.DS_Store
+
+# PDF
+*.pdf
+
+# Personal Info
+info.yml
