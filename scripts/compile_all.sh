@@ -3,8 +3,16 @@
 # 获取当前目录的绝对路径
 ROOT_DIR=$(pwd)
 
+EXCLUDES=(
+  "./lib.typ"
+)
+EXCLUDE_CONDITION=""
+for path in "${EXCLUDES[@]}"; do
+  EXCLUDE_CONDITION="$EXCLUDE_CONDITION ! -path \"$path/*\""
+done
+
 # 遍历当前文件夹内的所有 .typ 文件
-find "$ROOT_DIR" -type f -name "*.typ" | while read -r typ_file; do
+eval "find \"$ROOT_DIR\" -type f -name \"*.typ\" $EXCLUDE_CONDITION" | while read -r typ_file; do
   # 提取文件名（不包括路径）
   filename=$(basename "$typ_file")
 
