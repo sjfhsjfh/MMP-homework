@@ -1,0 +1,32 @@
+on:
+  push:
+    tags:
+      - 'hw.*'
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: typst-community/setup-typst@v3
+        with:
+          cache-dependency-path: requirements.typ
+      - name: Mock Info
+        run: |
+          echo 'course-name: "数学物理方法"
+          author-info: "2000011000 sjfhsjfh"
+          title-style: "simple"' > ./info.yml
+      - run: ./compile_all.sh
+        name: Compile PDF
+      
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          artifacts: "dist/*.pdf"
+          draft: true
+  
