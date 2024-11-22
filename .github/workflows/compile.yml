@@ -1,0 +1,50 @@
+on:
+  push:
+    tags:
+      - 'hw**'
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: typst-community/setup-typst@v3
+        with:
+          cache-dependency-path: requirements.typ
+
+      - name: Mock Info
+        run: |
+          echo 'course-name: "数学物理方法"
+          author-info: "2000011000 sjfhsjfh"
+          title-style: "simple"' > ./info.yml
+
+      - name: Cache Fonts
+        id: cache-fonts
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/fonts
+          key: ${{ runner.os }}-fonts-${{ hashFiles('fonts/*') }}
+
+      - name: Install Fonts
+        if: steps.cache-fonts.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.local/share/fonts
+          ./scripts/download_fonts.sh
+          find ./fonts -type f -name "*.ttf" -exec cp {} ~/.local/share/fonts \;
+          find ./fonts -type f -name "*.otf" -exec cp {} ~/.local/share/fonts \;
+          fc-cache -f -v
+
+      - name: Compile PDF
+        run: ./scripts/compile_all.sh
+
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          artifacts: "dist/*.pdf"
+          draft: true
+  
