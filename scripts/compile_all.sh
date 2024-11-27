@@ -4,11 +4,11 @@
 ROOT_DIR=$(pwd)
 
 EXCLUDES=(
-  "./lib.typ"
+  "**/lib.typ"
 )
 EXCLUDE_CONDITION=""
 for path in "${EXCLUDES[@]}"; do
-  EXCLUDE_CONDITION="$EXCLUDE_CONDITION ! -path \"$path/*\""
+  EXCLUDE_CONDITION="$EXCLUDE_CONDITION ! -path \"$path\""
 done
 
 # 遍历当前文件夹内的所有 .typ 文件
