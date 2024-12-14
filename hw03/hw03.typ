@@ -1,12 +1,8 @@
-#import "../lib.typ": config, prob
+#import "../lib.typ": *
 
 #import "@preview/xarrow:0.3.0": xarrow
 
 #show: config("第三周作业")
-
-#let Re = math.op("Re")
-#let Im = math.op("Im")
-#let dcases(..x) = math.cases(..x.pos().map(x => math.display(x)))
 
 #prob[
   //   z = x + iyßÆ)¤ºÍf (z) = u(x, y) + iv(x, y)¢‹u(x, y)Xeß¡¶—)¤º
@@ -322,9 +318,7 @@
   $
   绕 $n$ 个分支点一周, 则有 $n$ 个根式因子获得 $2 / 3 pi$ 的辐角, 因此
   $
-    root(3, 1 - z^3) => root(3, 1 - z^3) e^(i (2 n pi) / 3) = root(3, 1 - z^3) e^(
-      i 2 pi / 3
-    )^n = omega^n root(3, 1 - z^3)
+    root(3, 1 - z^3) => root(3, 1 - z^3) e^(i (2 n pi) / 3) = root(3, 1 - z^3) e^( i 2 pi / 3 )^n = omega^n root(3, 1 - z^3)
   $
   其中 $omega = e^(i (2 pi) / 3)$
 ]

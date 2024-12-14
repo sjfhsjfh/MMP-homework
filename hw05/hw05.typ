@@ -1,13 +1,10 @@
-#import "../lib.typ": config, prob
+#import "../lib.typ": *
 
 #import "@preview/physica:0.9.3": eval
 
 #show: config("第五周作业")
 
 #set figure(caption: [])
-
-#let Re = math.op("Re")
-#let Im = math.op("Im")
 
 #prob[
   求下列多值函数在指定点 $z = 1$, $i$, $-1$, $(1 + i)$ 的全部可能取值:
@@ -40,18 +37,14 @@
 
   =
   $
-    ln(z^i) = ln (
-      e^(i ln |z| - arg z - 2 k pi)
-    ) + 2 k' pi i = i ln abs(z) - arg z - 2 k pi + 2 k' pi i, wide "where" k, k' in ZZ
+    ln(z^i) = ln ( e^(i ln |z| - arg z - 2 k pi) ) + 2 k' pi i = i ln abs(z) - arg z - 2 k pi + 2 k' pi i, wide "where" k, k' in ZZ
   $
 
   #figure(
     table(
       table.vline(x: 1),
       $z$, $1$, $i$, $-1$, $(1 + i)$,
-      $ln(z^i)$, $2 pi (-k + k' i)$, $2 pi (-k + k' i - 1 / 4)$, $2 pi (-k + k' i - 1 / 2)$, $2 pi (
-          -k + k' i - 1 / 8
-        ) + i / 2 ln 2$,
+      $ln(z^i)$, $2 pi (-k + k' i)$, $2 pi (-k + k' i - 1 / 4)$, $2 pi (-k + k' i - 1 / 2)$, $2 pi ( -k + k' i - 1 / 8 ) + i / 2 ln 2$,
     ),
     caption: none,
   )

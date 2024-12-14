@@ -1,11 +1,6 @@
-#import "../lib.typ": config, prob, sub
+#import "../lib.typ": *
 
 #import "@preview/physica:0.9.3": eval
-
-#let Res = math.op("Res")
-#let Re = math.op("Re")
-#let dcases(..c) = math.cases(..c.pos().map(math.display))
-#let r = text(font: "Source Han Serif SC")[原式]
 
 #show: config("第九周作业")
 
@@ -25,9 +20,7 @@
 ][
   + 计算
     $
-      1 / (z^2 (z - 1)) - 1 / (z - 1) = - (1 + z) / z^2 = - 1 / ((z - 1) + 1)^2 - 1 / ((
-        z - 1
-      ) + 1) = - 2 + sum_(n = 1) (-1)^(n - 1) (n + 2) (z - 1)^n
+      1 / (z^2 (z - 1)) - 1 / (z - 1) = - (1 + z) / z^2 = - 1 / ((z - 1) + 1)^2 - 1 / (( z - 1 ) + 1) = - 2 + sum_(n = 1) (-1)^(n - 1) (n + 2) (z - 1)^n
     $
     从而有
     $

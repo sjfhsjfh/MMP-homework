@@ -1,4 +1,4 @@
-#import "../lib.typ": config, prob
+#import "../lib.typ": *
 
 #import "@preview/physica:0.9.3": eval
 
@@ -134,9 +134,7 @@
     $
     在 $zeta = z$ 和 $zeta = 0$ 处分别有留数 $- 16 / z^2$ 和 $16 / z$, 因此
     $
-      f(
-        z
-      ) = cases(
+      f( z ) = cases(
         (32 pi i) / z\, wide & abs(z) > 2,
         (32 pi i) / z - (32 pi i) / z^2\, wide & abs(z) < 2 且 z != 0,
         0\, wide & z = 0
@@ -145,11 +143,7 @@
 
   2. 在 $abs(z) = 1$ 以内, 割线以外的区域内无奇点, 因此
     $
-      integral.cont.ccw_(abs(z) = 1) ln ( 1 + 2 z ) / ( 1 - 2 z ) ( d z ) / ( z + 2 ) =& integral_(- 1 / 2)^(1 / 2) ln ( 1 + 2 (
-        x + 0^- i
-      )) / ( 1 - 2 (x + 0^- i)) ( d x ) / ( x + 2 ) + integral_(1 / 2)^(- 1 / 2) ln ( 1 + 2 (x + 0^+ i)) / ( 1 - 2 (
-        x + 0^+ i
-      )) ( d x ) / ( x + 2 ) \
+      integral.cont.ccw_(abs(z) = 1) ln ( 1 + 2 z ) / ( 1 - 2 z ) ( d z ) / ( z + 2 ) =& integral_(- 1 / 2)^(1 / 2) ln ( 1 + 2 ( x + 0^- i )) / ( 1 - 2 (x + 0^- i)) ( d x ) / ( x + 2 ) + integral_(1 / 2)^(- 1 / 2) ln ( 1 + 2 (x + 0^+ i)) / ( 1 - 2 ( x + 0^+ i )) ( d x ) / ( x + 2 ) \
       =& 4 pi ln (5 slash 2) / (3 slash 2) + 2 pi ln (3 slash 2) / (5 slash 2) \
       =& 2 pi ln 5 / 3
     $

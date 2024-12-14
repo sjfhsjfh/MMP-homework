@@ -1,16 +1,6 @@
-#import "../lib.typ": config, prob, sub
+#import "../lib.typ": *
 #import "@preview/physica:0.9.3": eval
 #import "@preview/slashion:0.1.1": slash-frac as sfrac
-
-#let Im = math.op("Im")
-#let LHS = "LHS"
-#let RHS = "RHS"
-#let r = "原式"
-#let img = "\u{2252}"
-#let isimgof = "\u{2253}"
-#let Re = math.op("Re")
-#let Res = math.op("Res")
-#let vp = math.op("v.p.")
 
 #show: config("第十三周作业")
 

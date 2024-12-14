@@ -1,13 +1,5 @@
-#import "../lib.typ": config, prob, sub
+#import "../lib.typ": *
 #import "@preview/slashion:0.1.1": slash-frac as sfrac
-
-#let Re = math.op("Re")
-#let Res = math.op("Res")
-#let Im = math.op("Im")
-#let dcases = (..args) => math.cases(..args.named(), ..args.pos().map(math.display))
-#let LHS = "LHS"
-#let RHS = "RHS"
-#let r = "原式"
 
 #let TBD = align(center, text(fill: red, weight: "bold", size: 2em)[TBD 没写完 TBD 没写完 TBD])
 
@@ -18,9 +10,7 @@
 #prob[
   求证：
   $
-    Gamma (
-      z
-    ) = integral_L e^(-t) t^(z - 1) dif t, med Re z > 0, med L "是自原点发出的射线", med 0 < abs(t) < oo, abs(arg t) < pi / 2
+    Gamma ( z ) = integral_L e^(-t) t^(z - 1) dif t, med Re z > 0, med L "是自原点发出的射线", med 0 < abs(t) < oo, abs(arg t) < pi / 2
   $
 ][
   构造积分环路
@@ -29,14 +19,8 @@
   $
   显然在 $rho$ 有限时该环路所围区域内 $f(t) = e^(-t) t^(z - 1)$ 解析，又有在 $rho -> oo$ 时
   $
-    integral.cont.ccw_L' f(
-      t
-    ) dif t = & integral_0^oo e^(-t) t^(z - 1) dif t - integral_L e^(-t) t^(z - 1) dif t + lim_(rho -> oo) integral_0^(arg t) e^(-rho e^(i theta)) (
-      rho e^(i theta)
-    )^(z - 1) i rho e^(i theta) dif theta \
-    = & Gamma(z) - integral_L e^(-t) t^(z - 1) dif t + lim_(rho -> oo) i integral_0^(arg t) e^(-rho cos theta) rho^z e^(i (
-      z theta - rho sin theta
-    )) dif theta \
+    integral.cont.ccw_L' f( t ) dif t = & integral_0^oo e^(-t) t^(z - 1) dif t - integral_L e^(-t) t^(z - 1) dif t + lim_(rho -> oo) integral_0^(arg t) e^(-rho e^(i theta)) ( rho e^(i theta) )^(z - 1) i rho e^(i theta) dif theta \
+    = & Gamma(z) - integral_L e^(-t) t^(z - 1) dif t + lim_(rho -> oo) i integral_0^(arg t) e^(-rho cos theta) rho^z e^(i ( z theta - rho sin theta )) dif theta \
     := & Gamma(z) - integral_L e^(-t) t^(z - 1) dif t + R(z)
   $
   注意到 $abs(arg t) < pi / 2$，则有被积函数中 $cos theta > 0$，从而 $Re z > 0$ 时有
@@ -89,9 +73,7 @@
     $
     由上问结论可化为 $f_(n + 1)(- nu - 1) f_(n + 1)(nu)$ 即
     $
-      [n (n + 1) - nu (nu + 1)][(n - 1) n - nu (nu + 1)] dots.c [
-        0 - nu (nu + 1)
-      ] = (Gamma(n - nu + 1) Gamma(n + nu + 2)) / (Gamma(- nu) Gamma(nu + 1))
+      [n (n + 1) - nu (nu + 1)][(n - 1) n - nu (nu + 1)] dots.c [ 0 - nu (nu + 1) ] = (Gamma(n - nu + 1) Gamma(n + nu + 2)) / (Gamma(- nu) Gamma(nu + 1))
     $
 ]
 
@@ -121,16 +103,12 @@
     $
     由留数定理得到
     $
-      0 = integral.cont.ccw_L' x^(- alpha) e^(i x) dif x = & I_1(alpha) - i integral_0^oo (
-        i x
-      )^(- alpha) e^(- x) dif x + lim_(rho -> oo) integral_0^(pi / 2) rho^(-alpha) e^(- i alpha theta) e^(i rho e^(i theta)) i rho e^(i theta) dif theta \
+      0 = integral.cont.ccw_L' x^(- alpha) e^(i x) dif x = & I_1(alpha) - i integral_0^oo ( i x )^(- alpha) e^(- x) dif x + lim_(rho -> oo) integral_0^(pi / 2) rho^(-alpha) e^(- i alpha theta) e^(i rho e^(i theta)) i rho e^(i theta) dif theta \
       = & I_1(alpha) - e^(i pi / 2 (1 - alpha)) Gamma(1 - alpha) + R(alpha)
     $
     对于 $R(alpha)$ 有
     $
-      R(alpha) = lim_(rho -> oo) i rho^(1 - alpha) integral_0^(pi / 2) e^(i (
-        (1 - alpha) theta + rho cos theta
-      )) e^(- rho sin theta) dif theta
+      R(alpha) = lim_(rho -> oo) i rho^(1 - alpha) integral_0^(pi / 2) e^(i ( (1 - alpha) theta + rho cos theta )) e^(- rho sin theta) dif theta
     $
     同理可得
     $
@@ -138,18 +116,12 @@
     $
     因此
     $
-      I_1(alpha) = e^(i pi / 2 (1 - alpha)) Gamma(1 - alpha) = cos ((1 - alpha) / 2 pi) Gamma(1 - alpha) + i sin (
-        (1 - alpha) / 2 pi
-      ) Gamma(1 - alpha)
+      I_1(alpha) = e^(i pi / 2 (1 - alpha)) Gamma(1 - alpha) = cos ((1 - alpha) / 2 pi) Gamma(1 - alpha) + i sin ( (1 - alpha) / 2 pi ) Gamma(1 - alpha)
     $
     从而分别有
     $
-      integral_0^oo x^(- alpha) sin x dif x = Im I_1(alpha) = sin ((1 - alpha) / 2 pi) Gamma(1 - alpha) & quad & (
-        0 < alpha < 1 "or" 1 < alpha < 2
-      ) \
-      integral_0^oo x^(- alpha) cos x dif x = Re I_1(alpha) = cos ((1 - alpha) / 2 pi) Gamma(1 - alpha) & quad & (
-        0 < alpha < 1
-      )
+      integral_0^oo x^(- alpha) sin x dif x = Im I_1(alpha) = sin ((1 - alpha) / 2 pi) Gamma(1 - alpha) & quad & ( 0 < alpha < 1 "or" 1 < alpha < 2 ) \
+      integral_0^oo x^(- alpha) cos x dif x = Re I_1(alpha) = cos ((1 - alpha) / 2 pi) Gamma(1 - alpha) & quad & ( 0 < alpha < 1 )
     $
     对于 $alpha = 1$ 单独考虑，有
     $
@@ -166,15 +138,11 @@
 
   + 记
     $
-      I_2(
-        alpha
-      ) := integral_0^oo x^(alpha - 1) e^(- x cos theta) e^(i x sin theta) dif x = integral_0^oo x^(alpha - 1) e^(- x e^(-i theta)) dif x
+      I_2( alpha ) := integral_0^oo x^(alpha - 1) e^(- x cos theta) e^(i x sin theta) dif x = integral_0^oo x^(alpha - 1) e^(- x e^(-i theta)) dif x
     $
     则上述积分可通过取实部和虚部得到，由习题 1. 结论知
     $
-      I_2(alpha) = e^(i alpha theta) integral_L t^(alpha - 1) e^(- t) dif t = e^(i alpha theta) Gamma(alpha) = cos (
-        alpha theta
-      ) Gamma(alpha) + i sin (alpha theta) Gamma(alpha)
+      I_2(alpha) = e^(i alpha theta) integral_L t^(alpha - 1) e^(- t) dif t = e^(i alpha theta) Gamma(alpha) = cos ( alpha theta ) Gamma(alpha) + i sin (alpha theta) Gamma(alpha)
     $
     综上，当 $alpha > 0$，$- pi / 2 < theta < pi / 2$ 时有
     $
@@ -212,9 +180,7 @@
     $
       & Gamma(z) Gamma(1 - z) = pi / (sin (pi z)) \
       => & (Gamma'(z) Gamma(1 - z) - Gamma(z) Gamma'(1 - z)) = - pi^2 / (sin^2 (pi z)) cos (pi z) \
-      => & (
-        (Gamma'(z)) / Gamma(z) - (Gamma'(1 - z)) / Gamma(1 - z)
-      ) = sfrac((- pi^2 / (sin^2 (pi z)) cos (pi z)) / (Gamma(z) Gamma(1 - z))) \
+      => & ( (Gamma'(z)) / Gamma(z) - (Gamma'(1 - z)) / Gamma(1 - z) ) = sfrac((- pi^2 / (sin^2 (pi z)) cos (pi z)) / (Gamma(z) Gamma(1 - z))) \
       => & Psi(1 - z) - Psi(z) = pi cot (pi z)
     $
 
@@ -311,9 +277,7 @@
 
   + 注意到对于 $z_0 = - n, n in NN$ 有
     $
-      Psi(z = z_0 + delta) = dif / (dif z) ln Gamma(z) = dif / (dif delta) ln Gamma(z_0 + delta) = & dif / (dif z) ln (
-        1 / (z_0 + delta) Gamma(z_0 + 1 + delta)
-      ) \
+      Psi(z = z_0 + delta) = dif / (dif z) ln Gamma(z) = dif / (dif delta) ln Gamma(z_0 + delta) = & dif / (dif z) ln ( 1 / (z_0 + delta) Gamma(z_0 + 1 + delta) ) \
       = & dif / (dif delta) ln product_(k = 0)^n (delta + k - n)^(-1) Gamma(delta + 1) \
       = & dif / (dif delta) (sum_(k = 0)^n (- ln (delta + k - n)) + ln Gamma(delta + 1)) \
       = & Psi(delta + 1) - sum_(k = 0)^n 1 / (delta + k - n)
@@ -326,11 +290,7 @@
     $
     求下列极限
     $
-      lim_(z -> z_0) (z - z_0) f(z) = & lim_(delta -> 0) (z_0 delta) / (cos (
-        (n + 1 / 2) pi sqrt(1 + delta)
-      )) =^"L'Hospital" lim_(delta -> 0) - z_0 / (sin ((n + 1 / 2) pi sqrt(1 + delta)) (
-        n + 1 / 2
-      ) pi 1 / (2 sqrt(1 + delta))) \
+      lim_(z -> z_0) (z - z_0) f(z) = & lim_(delta -> 0) (z_0 delta) / (cos ( (n + 1 / 2) pi sqrt(1 + delta) )) =^"L'Hospital" lim_(delta -> 0) - z_0 / (sin ((n + 1 / 2) pi sqrt(1 + delta)) ( n + 1 / 2 ) pi 1 / (2 sqrt(1 + delta))) \
       = & (-)^n (2 n + 1) pi
     $
     存在，则 $z = z_0$ 处的留数为 $(-)^n (2 n + 1) pi$
@@ -383,9 +343,7 @@
 
   + 孤立奇点为 $z_0 = 0$
     $
-      f(z) = sum_(n = 0)^oo (1 / 2)^n (z - 1 / z)^n / n! => Res f_(z = 0) = sum_(k = 0)^oo (1 / 2)^(2 k + 1) (
-        -
-      )^k / (k! (k + 1)!) = J_1(1)
+      f(z) = sum_(n = 0)^oo (1 / 2)^n (z - 1 / z)^n / n! => Res f_(z = 0) = sum_(k = 0)^oo (1 / 2)^(2 k + 1) ( - )^k / (k! (k + 1)!) = J_1(1)
     $
     无穷远点留数 $Res f_(z = oo) = - Res f_(z = 0) = - sum_(k = 0)^oo (1 / 2)^(2 k + 1) (-)^k / (k! (k + 1)!) = - J_1(1)$，其中 $J_(n)(x)$ 为 $n$ 阶 Bessel 函数
 
@@ -430,9 +388,7 @@
     $
     因此该积分为
     $
-      integral.cont.ccw_(abs(z - 1) = 1) 1 / (1 + z^4) dif z = 2 pi i (
-        Res f_(z = z_+) + Res f_(z = z_-)
-      ) = - (pi i) / sqrt(2)
+      integral.cont.ccw_(abs(z - 1) = 1) 1 / (1 + z^4) dif z = 2 pi i ( Res f_(z = z_+) + Res f_(z = z_-) ) = - (pi i) / sqrt(2)
     $
 
   + 路径内包含全部四个孤立奇点，留数分别为
@@ -446,9 +402,7 @@
     $
     因此该积分为
     $
-      integral.cont.ccw_(abs(z - 1) = 2) 1 / (1 + z^4) dif z = 2 pi i (
-        Res f_(z = z_1) + Res f_(z = z_2) + Res f_(z = z_3) + Res f_(z = z_4)
-      ) = 0
+      integral.cont.ccw_(abs(z - 1) = 2) 1 / (1 + z^4) dif z = 2 pi i ( Res f_(z = z_1) + Res f_(z = z_2) + Res f_(z = z_3) + Res f_(z = z_4) ) = 0
     $
 
   + 路径内包含 $z = 1$ 一个孤立奇点，留数为 $sqrt(2) / 4$，因此该积分为
@@ -458,9 +412,7 @@
 
   + 相较于上题，路径中额外包含 $z = - 1$ 一个孤立奇点，留数也为 $sqrt(2) / 4$，因此该积分为
     $
-      integral.cont.ccw_(abs(z) = 3) 1 / (z^2 - 1) sin (pi z) / 4 dif z = 2 pi i (
-        Res f_(z = 1) + Res f_(z = - 1)
-      ) = sqrt(2) pi i
+      integral.cont.ccw_(abs(z) = 3) 1 / (z^2 - 1) sin (pi z) / 4 dif z = 2 pi i ( Res f_(z = 1) + Res f_(z = - 1) ) = sqrt(2) pi i
     $
 
   + 路径内包含 $z = 0$ 一个孤立奇点，留数为 $e$，因此该积分为
@@ -475,9 +427,7 @@
     $
     因此该积分为
     $
-      integral.cont.ccw_(abs(z) = 2) 1 / (z^3 (z^10 - 2)) dif z = 2 pi i (
-        Res f_(z = 0) + sum_(n = 0)^9 Res f_(z = z_n)
-      ) = 2 pi i 2^(- 11 / 5) / 5 sum_(n = 0)^9 e^(- i n sfrac((2 pi) / 5)) = 0
+      integral.cont.ccw_(abs(z) = 2) 1 / (z^3 (z^10 - 2)) dif z = 2 pi i ( Res f_(z = 0) + sum_(n = 0)^9 Res f_(z = z_n) ) = 2 pi i 2^(- 11 / 5) / 5 sum_(n = 0)^9 e^(- i n sfrac((2 pi) / 5)) = 0
     $
 
   + 路径内包含 $z = 0$ 一个孤立奇点，留数为 $1 / 2$，因此该积分为
@@ -491,9 +441,7 @@
     $
     单独考虑 $z = 0$，留数为 $1 / (2 pi i)$，因此该积分为
     $
-      integral.cont.ccw_(abs(z) = R) z^2 / (e^(2 pi i z^3) - 1) dif z = 2 pi i (
-        Res f_(z = 0) + sum_(abs(z_p) < R) Res f_(z = z_p)
-      ) = 2 pi i (1 / (2 pi i) + (2 n) / (6 pi i)) = 1 + 2 / 3 n
+      integral.cont.ccw_(abs(z) = R) z^2 / (e^(2 pi i z^3) - 1) dif z = 2 pi i ( Res f_(z = 0) + sum_(abs(z_p) < R) Res f_(z = z_p) ) = 2 pi i (1 / (2 pi i) + (2 n) / (6 pi i)) = 1 + 2 / 3 n
     $
 
   + 由三角函数对称性

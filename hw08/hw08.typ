@@ -1,11 +1,6 @@
-#import "../lib.typ": config, prob, sub
+#import "../lib.typ": *
 
 #import "@preview/physica:0.9.3": eval
-
-#let Res = math.op("Res")
-#let Re = math.op("Re")
-#let dcases(..c) = math.cases(..c.pos().map(math.display))
-#let r = text(font: "Source Han Serif SC")[原式]
 
 #show: config("第十周作业")
 
@@ -51,9 +46,7 @@
     $
     即展开为
     $
-      1 / (1 + z + z^2) = sum_(n = 0)^oo 2 / sqrt(3) sin ((2 pi (n + 1)) / 3) z^n = sum_(n = 0)^oo (
-        z^(3 n) - z^(3 n + 1)
-      )
+      1 / (1 + z + z^2) = sum_(n = 0)^oo 2 / sqrt(3) sin ((2 pi (n + 1)) / 3) z^n = sum_(n = 0)^oo ( z^(3 n) - z^(3 n + 1) )
     $
 
   + 由 $sin z$ 在 $z = 0$ 处展开
@@ -71,9 +64,7 @@
       f'(z) = & 1 / (1 - z)^2 exp(1 / (1 - z)) & => f'(0) = & e \
       f''(z) = & (1 / (1 - z)^4 + 2 / (1 - z)^3) exp(1 / (1 - z)) & => f''(0) = & 3 e \
       f'''(z) = & (1 / (1 - z)^6 + 6 / (1 - z)^5 + 6 / (1 - z)^4) exp(1 / (1 - z)) & => f'''(0) = & 13 e \
-      f''''(z) = & (1 / (1 - z)^8 + 12 / (1 - z)^7 + 36 / (1 - z)^6 + 24 / (1 - z)^5) exp(1 / (1 - z)) & => f''''(
-        0
-      ) = & 73 e
+      f''''(z) = & (1 / (1 - z)^8 + 12 / (1 - z)^7 + 36 / (1 - z)^6 + 24 / (1 - z)^5) exp(1 / (1 - z)) & => f''''( 0 ) = & 73 e
     $
     展开
     $

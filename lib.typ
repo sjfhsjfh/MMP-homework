@@ -25,3 +25,14 @@
 )
 
 #import ichigo: prob
+
+#let Im = math.op("Im")
+#let Re = math.op("Re")
+#let LHS = "LHS"
+#let RHS = "RHS"
+#let r = "原式"
+#let img = "\u{2252}"
+#let isimgof = "\u{2253}"
+#let Res = math.op("Res")
+#let vp = math.op("v.p.")
+#let dcases = (..args) => math.cases(..args.named(), ..args.pos().map(math.display))

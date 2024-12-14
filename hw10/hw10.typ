@@ -1,4 +1,4 @@
-#import "../lib.typ": config, prob, sub
+#import "../lib.typ": *
 
 #show: config("第十周作业")
 
@@ -59,9 +59,7 @@
 
   + 被积函数在 $CC$ 上解析（$zeta = 0$ 处为可去奇点），因此原函数在有限点上解析，考察 $oo$ 处，有
     $
-      lim_(rho -> oo) f(rho e^(i theta_1)) - f(
-        rho e^(i theta_2)
-      ) = & lim_(rho -> oo) integral_(theta_1)^(theta_2) (sinh sqrt(rho e^(i theta))) / sqrt(rho e^(i theta)) i rho e^(i theta) dif theta \
+      lim_(rho -> oo) f(rho e^(i theta_1)) - f( rho e^(i theta_2) ) = & lim_(rho -> oo) integral_(theta_1)^(theta_2) (sinh sqrt(rho e^(i theta))) / sqrt(rho e^(i theta)) i rho e^(i theta) dif theta \
       = & lim_(rho -> oo) i integral_(theta_1)^(theta_2) sqrt(rho e^(i theta)) sinh sqrt(rho e^(i theta)) dif theta \
       = & oo ("if" theta_1 != theta_2)
     $

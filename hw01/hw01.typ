@@ -2,7 +2,7 @@
 #import "@preview/numbly:0.1.0": numbly
 #import "@preview/physica:0.9.3": pdv
 
-#import "../lib.typ": config, prob
+#import "../lib.typ": *
 
 #show: config("第一周作业")
 
@@ -442,9 +442,7 @@
     $
     仅可能在 $z = -1 - i$ 处可导，单独检查有
     $
-      & lim_(rho -> 0) (((1 + rho cos theta)^2 + 2 (1 + rho sin theta)) + i (
-        (1 + rho cos theta)^2 + (1 + rho sin theta)^2
-      ) - (3 + 2 i)) / (rho e^(i theta)) \
+      & lim_(rho -> 0) (((1 + rho cos theta)^2 + 2 (1 + rho sin theta)) + i ( (1 + rho cos theta)^2 + (1 + rho sin theta)^2 ) - (3 + 2 i)) / (rho e^(i theta)) \
       =& lim_(rho -> 0) (2 cos theta + 2 sin theta + 2 i cos theta + 2 i sin theta) e^(-i theta) \
       =& 2 (1 + i) lim_(rho -> 0) (cos theta + sin theta) e^(-i theta)
     $
@@ -476,9 +474,7 @@
     $
     故该函数仅当 $x = y + 1$ 时可导，对于 $z = 1 + (1 + i) r, r in RR$ 有
     $
-      & lim_(rho -> 0) ((1 + rho cos theta - rho sin theta)^2 + 2 i (1 + 2 r + rho cos theta + rho sin theta) - (
-        1 + 2 i (1 + 2 r)
-      )) / (rho e^(i theta)) \
+      & lim_(rho -> 0) ((1 + rho cos theta - rho sin theta)^2 + 2 i (1 + 2 r + rho cos theta + rho sin theta) - ( 1 + 2 i (1 + 2 r) )) / (rho e^(i theta)) \
       =& lim_(rho -> 0) (2 cos theta - 2 sin theta + 2 i cos theta + 2 i sin theta) e^(-i theta) \
       =& 2 (1 + i) lim_(rho -> 0) (cos theta + i sin theta) e^(-i theta) = 2 (1 + i)
     $
@@ -501,9 +497,7 @@
   $
   计算 Jacobi 矩阵
   $
-    (diff (rho, phi)) / (diff (
-      x, y
-    )) = mat(pdv(rho, x), pdv(rho, y); pdv(phi, x), pdv(phi, y)) = mat(cos phi, sin phi; - (sin phi) / rho, (cos phi) / rho)
+    (diff (rho, phi)) / (diff ( x, y )) = mat(pdv(rho, x), pdv(rho, y); pdv(phi, x), pdv(phi, y)) = mat(cos phi, sin phi; - (sin phi) / rho, (cos phi) / rho)
   $
   得到
   $
@@ -547,12 +541,8 @@
   带入上式得
   $
     pdv(u, x) + i pdv(v, x) &=& f'(z) =& - i pdv(u, y) + pdv(v, y) \
-    pdv(u, rho) cos phi - (sin phi) / rho pdv(u, phi) + i (pdv(v, rho) cos phi - (sin phi) / rho pdv(v, phi)) &=&=& -i (
-      pdv(u, rho) sin phi + (cos phi) / rho pdv(u, phi)
-    ) + pdv(v, rho) sin phi + (cos phi) / rho pdv(v, phi) \
-    (cos phi - i sin phi) / rho (pdv(v, phi) - i pdv(u, phi)) &=&=& (cos phi - i sin phi) (
-      pdv(u, rho) + i pdv(v, rho)
-    ) \
+    pdv(u, rho) cos phi - (sin phi) / rho pdv(u, phi) + i (pdv(v, rho) cos phi - (sin phi) / rho pdv(v, phi)) &=&=& -i ( pdv(u, rho) sin phi + (cos phi) / rho pdv(u, phi) ) + pdv(v, rho) sin phi + (cos phi) / rho pdv(v, phi) \
+    (cos phi - i sin phi) / rho (pdv(v, phi) - i pdv(u, phi)) &=&=& (cos phi - i sin phi) ( pdv(u, rho) + i pdv(v, rho) ) \
     1 / z (pdv(v, phi) - i pdv(u, phi)) &=&=& rho / z (pdv(u, rho) + i pdv(v, rho))
   $
   从而证得在 $z = rho e^(i phi)$，$f(z) = u + i v$ 时

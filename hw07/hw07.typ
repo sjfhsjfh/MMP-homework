@@ -1,10 +1,6 @@
-#import "../lib.typ": config, prob, sub
+#import "../lib.typ": *
 
 #import "@preview/physica:0.9.3": eval
-
-#let Res = math.op("Res")
-#let Re = math.op("Re")
-#let dcases(..c) = math.cases(..c.pos().map(math.display))
 
 #show: config("第七周作业")
 
@@ -129,9 +125,7 @@
   $
   综上所述, 原级数收敛, 且和为
   $
-    sum_(n = 1)^oo z^(n - 1) / ((1 - z^n) (
-      1 - z^(n + 1)
-    )) = dcases(
+    sum_(n = 1)^oo z^(n - 1) / ((1 - z^n) ( 1 - z^(n + 1) )) = dcases(
       1 / (z - 1)^2\, wide & abs(z) < 1,
       1 / (z (z - 1)^2)\, wide & abs(z) > 1
     )
@@ -203,9 +197,7 @@
 
   + 根据 Cauchy-Hadamard 公式, 有
     $
-      R = lim_(n -> oo) (1 / (1 slash (2^(2n) (n!)^2)))^(1 / n) = 4 lim_(n -> oo) (
-        n!
-      )^(2 / n) = 4 / e^2 lim_(n -> oo) n^2 = oo
+      R = lim_(n -> oo) (1 / (1 slash (2^(2n) (n!)^2)))^(1 / n) = 4 lim_(n -> oo) ( n! )^(2 / n) = 4 / e^2 lim_(n -> oo) n^2 = oo
     $
 
   + 根据 Cauchy-Hadamard 公式, 有
